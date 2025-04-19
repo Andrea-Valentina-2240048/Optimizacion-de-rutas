@@ -1,7 +1,7 @@
 # Optimizacion-de-rutas
-# Andrea Valentina Delgado Ruiz - 2240048
-# Vanessa Martínez Angarita - 2241917
-# Nelson Andres Urrea Calvo - 2221115
+Andrea Valentina Delgado Ruiz - 2240048
+Vanessa Martínez Angarita - 2241917
+Nelson Andres Urrea Calvo - 2221115
 
 Enfoque del proyecto:
 A través de este proyecto se desarrollará un sistema de optimización de rutas que encuentre el
