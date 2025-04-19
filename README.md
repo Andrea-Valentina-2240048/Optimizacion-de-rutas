@@ -8,7 +8,7 @@ A través de este proyecto se desarrollará un sistema de optimización de rutas
 camino más óptimo desde un lugar a otro, nosotros decidimos basar este proyecto en la UIS,
 tomando inicialmente 12 edificios de la universidad que conectaremos en varias rutas.
 
-Desarrollo de la primera versión:
+# Desarrollo de la primera versión:
 Para el desarrollo de esta primera versión del proyecto, trabajaremos con listas doblemente
 enlazadas. Cada nodo representará un punto (edificio de la universidad) y se tendrán varias 
 listas que contienen todos los lugares pero en orden diferente (rutas).
