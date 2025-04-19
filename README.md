@@ -3,7 +3,7 @@ Andrea Valentina Delgado Ruiz - 2240048
 Vanessa Martínez Angarita - 2241917
 Nelson Andres Urrea Calvo - 2221115
 
-Enfoque del proyecto:
+# Enfoque del proyecto:
 A través de este proyecto se desarrollará un sistema de optimización de rutas que encuentre el
 camino más óptimo desde un lugar a otro, nosotros decidimos basar este proyecto en la UIS,
 tomando inicialmente 12 edificios de la universidad que conectaremos en varias rutas.
