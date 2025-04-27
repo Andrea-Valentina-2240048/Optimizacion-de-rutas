@@ -19,7 +19,7 @@ class Arbol():
         self.casona = Node("Casona La Perla")
         self.tienda_universitaria = Node("Tienda Universitaria")
         self.humanas2 = Node("Humanas 2")
-        self.mecanica = Node("Ingeniería mecánica")
+        self.mecanica = Node("Ingeniería Mecánica")
         self.humanas1 = Node("Humanas 1")
         self.lab_livianos = Node("Laboratorio de Livianos")
         self.edic = Node("EDIC")
@@ -35,9 +35,18 @@ class Arbol():
         self.centic = Node("CENTIC")
         self.ingenieria_quimica = Node("Ingeniería Química")
         self.jose_bautista_vesga = Node("José Bautista Vesga")
-        self.fisicomecanica = Node("Ingeniería Físico-Mecánicas")
+        self.fisicomecanica = Node("Ingenierías Físico-Mecánicas")
         self.uisalud = Node("Uisalud")
-        self.dicNodos = {"Uisalud": self.uisalud,"Ingeniería Físico-Mecánicas":self.fisicomecanica,"José Bautista Vesga": self.jose_bautista_vesga}
+        self.dicNodos = {"Portería": self.porteria, "Uisalud": self.uisalud,"Ingenierías Físico-Mecánicas":self.fisicomecanica,"José Bautista Vesga": self.jose_bautista_vesga,
+            "Coliseo UIS": self.coliseo, "Luisa A. Calvo": self.luis_a_calvo, "Residencias de Estudiantes": self.residencias, "Estadio 1ero de marzo": self.estadio, 
+            "Canchas Múltiples": self.canchas, "Administración 1": self.admin1, "Administración 2": self.admin2, "Administración 3": self.admin3, 
+            "Bienestar Estudiantil": self.bienestar_estudiantil, "Bienestar Campestre": self.bienestar_campestre, "Auditorio José Antonio Galán": self.auditorio_galan,
+            "Casona La Perla": self.casona, "Tienda Universitaria": self.tienda_universitaria, "Humanas 2": self.humanas2, "Ingeniería Mecánica": self.mecanica, 
+            "Humanas 1": self.humanas1, "Laboratorio de Livianos": self.lab_livianos, "EDIC": self.edic, "Auditorio Luis Eduardo Lobo": self.auditorio_lobo,
+            "Biblioteca": self.biblioteca, "Instituto de Lenguas": self.instituto_lenguas, "Federico Mamitza Bayer": self.federico, "Ingeniería Industrial": self.ingenieria_industrial,
+            "Ingeniería E3T": self.ingenieria_e3t, "Diseño Industrial": self.diseno_industrial, "Laboratorios de Alta Tensión": self.alta_tension,
+            "Camilo Torres": self.camilo_torres, "CENTIC": self.centic, "Ingeniería Química": self.ingenieria_quimica
+        }
         
     def asignarHijo(self,padre,hijo):
         self.dicNodos[padre].append(self.dicNodos[hijo])
@@ -79,7 +88,7 @@ porteria27.asignarHijo('Camilo Torres', 'José Bautista Vesga')
 porteria27.asignarHijo('Camilo Torres', 'Ingeniería Química')
 porteria27.asignarHijo('CENTIC', 'Uisalud')
 porteria27.asignarHijo('CENTIC', 'Federico Mamitza Bayer')
-porteria27.asignarHijo('José Bautista Vesga', 'Facultad de Ingenierías Fisicomecánicas')
+porteria27.asignarHijo('José Bautista Vesga', 'Ingenierías Físico-Mecánicas')
 porteria27.asignarHijo('Federico Mamitza Bayer', 'Ingeniería Industrial')
 porteria27.asignarHijo('Federico Mamitza Bayer', 'Laboratorios de Alta Tensión')
 porteria27.asignarHijo('Federico Mamitza Bayer', 'Ingeniería E3T')
