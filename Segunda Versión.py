@@ -60,18 +60,18 @@ class Arbol():
                     print(f"Nodo {nodo.Num}: {nombre}")
 
     def buscarNodoPorNumero(self, numero):
-        lugar_encontrado = None  # Inicializamos una variable para almacenar el nodo encontrado
+        lugar_encontrado = None  
         for nodo in self.dicNodos.values():
             if nodo.Num == numero:
-                lugar_encontrado = nodo  # Asignamos el nodo encontrado a la variable
-                break  # Rompemos el ciclo una vez que encontramos el nodo
+                lugar_encontrado = nodo  
+                break 
 
-        if lugar_encontrado is None:  # Si no se encontró el nodo
+        if lugar_encontrado is None:  
             print("Ese lugar no se encuentra en el mapa")
-            return None  # Devolvemos None si no se encontró el nodo
+            return None  
 
-        # Si encontramos el nodo, retornamos el nombre del nodo (o cualquier propiedad)
-        return lugar_encontrado.name  # Aquí retornamos solo el nombre
+        
+        return lugar_encontrado.name 
         
     def asignarHijo(self,padre,hijo):
         self.dicNodos[padre].append(self.dicNodos[hijo])
@@ -213,7 +213,7 @@ def menu():
         if opcion == '1':
             porteria25.imprimirNodos()
             NumIni = int(input("¿En qué edificio se encuentra actualmente?(Escriba simplemente el numero) "))
-            NumFin = int(input("¿A dónde quiere llegar? (Escriba simplemente el numero): "))
+            NumFin = int(input("¿A dónde quiere llegar?: "))
             lugar_inicial = porteria25.buscarNodoPorNumero(NumIni)
             lugar_final = porteria25.buscarNodoPorNumero(NumFin)
             print(f"Lugar inicial: {lugar_inicial}")
@@ -253,3 +253,4 @@ def menu():
 
 # Llamada a la función del menú
 menu()
+
