@@ -4,9 +4,11 @@ from bigtree import preorder_iter
 
 class Arbol():
     def __init__(self):
-        self.porteria = Node("Portería")
+        self.porteria25 = Node("Portería 25")
+        self.porteria30 = Node("Portería 30")
+        self.porteria27 = Node("Portería 27")
         self.coliseo = Node("Coliseo UIS", "Esta ubicado al sureste del campus, cuenta con una cancha polifuncional, camerinos, oficinas y gradería. Tiene 2 pisos y su fachada es en ladrillo rojizo, tiene unas lineas de colores y su techo tiene un estilo semicurvo.")
-        self.luis_a_calvo = Node("Luisa A. Calvo", "Edificio de 20 metros de altura con una fachada curva en semióvalo y sin ventanas visibles. Está construido en ladrillo rojizo.")
+        self.luis_a_calvo = Node("Luis A. Calvo", "Edificio de 20 metros de altura con una fachada curva en semióvalo y sin ventanas visibles. Está construido en ladrillo rojizo.")
         self.residencias = Node("Residencias de Estudiantes", "Edificio de varios pisos con fachada blanca y paneles verticales marrones. Las escaleras laterales conectan todos los niveles.")
         self.estadio = Node("Estadio 1ero de marzo", "Estadio con pista de atletismo de ocho carriles, alternando azul claro y oscuro que rodea el campo central.")
         self.canchas = Node("Canchas Múltiples", "Área deportiva con varias canchas al aire libre para diversas disciplinas.")
@@ -37,8 +39,9 @@ class Arbol():
         self.jorge_bautista_vesga = Node("Jorge Bautista Vesga", "Edificio de escuela de Ingeniería Metalúrgica y Ciencia de Materiales, 3 pisos, con muro de ladrillo y al final de la calle.")
         self.fisicomecanica = Node("Ingenierías Físico-Mecánicas", "Esta facultad cuenta con 4 niveles, está construida en ladrillo de color rojizo, en su entrada se puede apreciar un letrero con su nombre y se identifica principalmente por la figura denominada Corte de construcción al Viento construida en hierro y PVC.")
         self.uisalud = Node("Uisalud", "Este edificio cuenta con 3 pisos, tiene su nombre en grande en la fachada, es de colores gris y blanco, y cuenta con varios ventanales. Está ubicado detrás del CENTIC y junto al Aula Máxima de Ciencias.")
-        self.dicNodos = {"Portería": self.porteria, "Uisalud": self.uisalud,"Ingenierías Físico-Mecánicas":self.fisicomecanica,"Jorge Bautista Vesga": self.jorge_bautista_vesga,
-            "Coliseo UIS": self.coliseo, "Luisa A. Calvo": self.luis_a_calvo, "Residencias de Estudiantes": self.residencias, "Estadio 1ero de marzo": self.estadio, 
+        
+        self.dicNodos = {"Portería 30": self.porteria30, "Portería 27": self.porteria27, "Portería 25": self.porteria25, "Uisalud": self.uisalud,"Ingenierías Físico-Mecánicas":self.fisicomecanica,"Jorge Bautista Vesga": self.jorge_bautista_vesga,
+            "Coliseo UIS": self.coliseo, "Luis A. Calvo": self.luis_a_calvo, "Residencias de Estudiantes": self.residencias, "Estadio 1ero de marzo": self.estadio, 
             "Canchas Múltiples": self.canchas, "Administración 1": self.admin1, "Administración 2": self.admin2, "Administración 3": self.admin3, 
             "Bienestar Estudiantil": self.bienestar_estudiantil, "Bienestar Campestre": self.bienestar_campestre, "Auditorio José Antonio Galán": self.auditorio_galan,
             "Casona La Perla": self.casona, "Tienda Universitaria": self.tienda_universitaria, "Humanas 2": self.humanas2, "Ingeniería Mecánica": self.mecanica, 
@@ -51,8 +54,14 @@ class Arbol():
     def asignarHijo(self,padre,hijo):
         self.dicNodos[padre].append(self.dicNodos[hijo])
 
-    def mostrarArbol(self):
-        print_tree(self.porteria)
+    def mostrarArbol(self, nombre_porteria):
+        if nombre_porteria == "Portería 27":
+            print_tree(self.porteria27)
+        if nombre_porteria == "Portería 30":
+            print_tree(self.porteria30)
+        if nombre_porteria == "Portería 25":
+            print_tree(self.porteria25)
+
 # Mostrar árbol
 #print_tree(root)
 #print_tree(porteria30)
@@ -61,16 +70,16 @@ class Arbol():
 #print([node.node_name for node in ruta])
 
 porteria27 = Arbol()
-porteria27.asignarHijo('Portería', 'Tienda Universitaria')
-porteria27.asignarHijo('Portería', 'Humanas 1')
-porteria27.asignarHijo('Portería', 'Humanas 2')
-porteria27.asignarHijo('Portería', 'Coliseo UIS')
+porteria27.asignarHijo('Portería 27', 'Tienda Universitaria')
+porteria27.asignarHijo('Portería 27', 'Humanas 1')
+porteria27.asignarHijo('Portería 27', 'Humanas 2')
+porteria27.asignarHijo('Portería 27', 'Coliseo UIS')
 porteria27.asignarHijo('Tienda Universitaria', 'Laboratorio de Livianos')
-porteria27.asignarHijo('Tienda Universitaria', 'Luisa A. Calvo')
+porteria27.asignarHijo('Tienda Universitaria', 'Luis A. Calvo')
 porteria27.asignarHijo('Humanas 1', 'EDIC')
 porteria27.asignarHijo('Humanas 2', 'Ingeniería Mecánica')
-porteria27.asignarHijo('Luisa A. Calvo', 'Estadio 1ero de marzo')
-porteria27.asignarHijo('Luisa A. Calvo', 'Administración 1')
+porteria27.asignarHijo('Luis A. Calvo', 'Estadio 1ero de marzo')
+porteria27.asignarHijo('Luis A. Calvo', 'Administración 1')
 porteria27.asignarHijo('Coliseo UIS', 'Residencias de Estudiantes')
 porteria27.asignarHijo('Residencias de Estudiantes', 'Canchas Múltiples')
 porteria27.asignarHijo('Administración 1', 'Administración 3')
@@ -93,14 +102,47 @@ porteria27.asignarHijo('Federico Mamitza Bayer', 'Ingeniería Industrial')
 porteria27.asignarHijo('Federico Mamitza Bayer', 'Laboratorios de Alta Tensión')
 porteria27.asignarHijo('Laboratorios de Alta Tensión', 'Diseño Industrial')
 porteria27.asignarHijo('Federico Mamitza Bayer', 'Ingeniería E3T')
-porteria27.mostrarArbol()
+porteria27.mostrarArbol("Portería 27")
 
 
 porteria25 = Arbol()
+porteria25.asignarHijo('Portería 25', 'Jorge Bautista Vesga')
+porteria25.asignarHijo('Portería 25', 'EDIC')
+porteria25.asignarHijo('Jorge Bautista Vesga', 'Ingenierías Físico-Mecánicas')
+porteria25.asignarHijo('Jorge Bautista Vesga', 'Ingeniería Química')
+porteria25.asignarHijo('Ingeniería Química', 'CENTIC')
+porteria25.asignarHijo('Ingeniería Química', 'Uisalud')
+porteria25.asignarHijo('CENTIC', 'Biblioteca')
+porteria25.asignarHijo('CENTIC', 'Auditorio Luis Eduardo Lobo')
+porteria25.asignarHijo('Auditorio Luis Eduardo Lobo', 'Administración 1')
+porteria25.asignarHijo('Auditorio Luis Eduardo Lobo', 'Luis A. Calvo')
+porteria25.asignarHijo('Luis A. Calvo', 'Coliseo UIS')
+porteria25.asignarHijo('Coliseo UIS', 'Residencias de Estudiantes')
+porteria25.asignarHijo('Uisalud', 'Laboratorios de Alta Tensión')
+porteria25.asignarHijo('Uisalud', 'Federico Mamitza Bayer')
+porteria25.asignarHijo('Laboratorios de Alta Tensión', 'Diseño Industrial')
+porteria25.asignarHijo('Federico Mamitza Bayer', 'Ingeniería E3T')
+porteria25.asignarHijo('Federico Mamitza Bayer', 'Instituto de Lenguas')
+porteria25.asignarHijo('Federico Mamitza Bayer', 'Ingeniería E3T')
+porteria25.asignarHijo('Ingeniería E3T', 'Ingeniería Industrial')
+porteria25.asignarHijo('Instituto de Lenguas', 'Casona La Perla')
+porteria25.asignarHijo('Instituto de Lenguas', 'Auditorio José Antonio Galán')
+porteria25.asignarHijo('Casona La Perla', 'Bienestar Estudiantil')
+porteria25.asignarHijo('Casona La Perla', 'Administración 2')
+porteria25.asignarHijo('Bienestar Estudiantil', 'Bienestar Campestre')
+porteria25.asignarHijo('Bienestar Estudiantil', 'Canchas Múltiples')
+porteria25.asignarHijo('Auditorio José Antonio Galán', 'Administración 3')
+porteria25.asignarHijo('Administración 3', 'Estadio 1ero de marzo')
+porteria25.asignarHijo('EDIC', 'Camilo Torres')
+porteria25.asignarHijo('EDIC', 'Humanas 1')
+porteria25.asignarHijo('Camilo Torres', 'Ingeniería Mecánica')
+porteria25.asignarHijo('Camilo Torres', 'Humanas 2')
+porteria25.asignarHijo('Humanas 1', 'Tienda Universitaria')
+porteria25.mostrarArbol("Portería 25")
 
 porteria30 = Arbol()
-porteria30.asignarHijo('Portería', 'Coliseo UIS')
-porteria30.asignarHijo('Portería', 'Luisa A. Calvo')
+porteria30.asignarHijo('Portería 30', 'Coliseo UIS')
+porteria30.asignarHijo('Portería 30', 'Luis A. Calvo')
 porteria30.asignarHijo('Coliseo UIS', 'Residencias de Estudiantes')
 porteria30.asignarHijo('Residencias de Estudiantes', 'Estadio 1ero de marzo')
 porteria30.asignarHijo('Residencias de Estudiantes', 'Canchas Múltiples')
@@ -111,9 +153,9 @@ porteria30.asignarHijo('Estadio 1ero de marzo', 'Bienestar Estudiantil')
 porteria30.asignarHijo('Estadio 1ero de marzo', 'Bienestar Campestre')
 porteria30.asignarHijo('Administración 3', 'Auditorio José Antonio Galán')
 porteria30.asignarHijo('Bienestar Estudiantil', 'Casona La Perla')
-porteria30.asignarHijo('Luisa A. Calvo', 'Tienda Universitaria')
-porteria30.asignarHijo('Luisa A. Calvo', 'Humanas 2')
-porteria30.asignarHijo('Luisa A. Calvo', 'Ingeniería Mecánica')
+porteria30.asignarHijo('Luis A. Calvo', 'Tienda Universitaria')
+porteria30.asignarHijo('Luis A. Calvo', 'Humanas 2')
+porteria30.asignarHijo('Luis A. Calvo', 'Ingeniería Mecánica')
 porteria30.asignarHijo('Tienda Universitaria', 'Humanas 1')
 porteria30.asignarHijo('Humanas 1', 'Laboratorio de Livianos')
 porteria30.asignarHijo('Humanas 1', 'EDIC')
@@ -131,6 +173,6 @@ porteria30.asignarHijo('Camilo Torres', 'Ingeniería Química')
 porteria30.asignarHijo('Ingeniería Química', 'Jorge Bautista Vesga')
 porteria30.asignarHijo('Ingeniería Química', 'Ingenierías Físico-Mecánicas')
 porteria30.asignarHijo('Ingeniería Química', 'Uisalud')
-porteria30.mostrarArbol()
+porteria30.mostrarArbol("Portería 30")
 
 arboles = [porteria25,porteria27,porteria30]
