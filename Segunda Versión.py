@@ -176,3 +176,57 @@ porteria30.asignarHijo('Ingeniería Química', 'Uisalud')
 porteria30.mostrarArbol("Portería 30")
 
 arboles = [porteria25,porteria27,porteria30]
+
+def menu():
+    
+    while True:
+        print("\nMenú:")
+        print("1. Añadir lugar actual y destino")
+        print("2. Ruta más corta")
+        print("3. Todas las rutas")
+        print("4. Salir")
+        
+        opcion = input("¿Qué función desea utilizar? ")
+
+        if opcion == '1':
+            lugar_inicial = input("¿En qué edificio se encuentra actualmente?: ")
+            lugar_final = input("¿A dónde quiere llegar?: ")
+            #
+            #
+            #
+            print(f"Lugar inicial: {lugar_inicial}")
+            print(f"Lugar final: {lugar_final}")
+            
+        elif opcion == '2':
+            if lugar_inicial != None and lugar_final != None:
+                print(f"Ruta más corta de {lugar_inicial} a {lugar_final}")
+                #
+                #
+                #
+            else:
+                print("Primero debes añadir el lugar inicial y final.")
+                
+        elif opcion == '3':
+            if lugar_inicial != None and lugar_final != None:
+                print(f"Todas las rutas de {lugar_inicial} a {lugar_final}")
+                #
+                #
+                #
+            else:
+                print("Primero debes añadir el lugar inicial y final.")
+                
+        elif opcion == '4':
+            print("Saliendo...")
+            break
+        
+        else:
+            print("Opción no válida. Por favor, selecciona una opción correcta.")
+
+        seguir = input("¿Deseas volver al menú principal? (Sí o No): ").lower()
+        if seguir not in ['Sí', 'Si', 'si', 'sí']:
+            print("Saliendo ")
+            break
+
+
+# Llamada a la función del menú
+menu()
