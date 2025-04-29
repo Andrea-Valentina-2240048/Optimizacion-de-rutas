@@ -200,16 +200,13 @@ def encontrarRutaMasCorta(lugar_inicial, lugar_final):
     temporal = 10000
     ruta_mas_corta = None
     for arbol in arboles:
-        if(arbol.dicNodos[lugar_inicial] is not None and arbol.dicNodos[lugar_final]):
             ruta = arbol.obtenerRuta(lugar_inicial,lugar_final)
             distancia = len(ruta)
             if distancia<temporal:
                 temporal = distancia
                 ruta_mas_corta = ruta 
-        else:
-
-            print('Digite los lugares correctamente')
-        return ruta_mas_corta
+            
+    return ruta_mas_corta
 
 
 def menu():
@@ -290,5 +287,5 @@ def menu():
             break
 
 
-# Llamada a la función del menú
+#Llamada a la función del menú
 menu()
