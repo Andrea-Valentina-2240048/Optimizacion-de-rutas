@@ -105,11 +105,13 @@ porteria27.asignarHijo('Portería 27', 'Coliseo UIS')
 porteria27.asignarHijo('Tienda Universitaria', 'Laboratorio de Livianos')
 porteria27.asignarHijo('Tienda Universitaria', 'Luis A. Calvo')
 porteria27.asignarHijo('Humanas 1', 'EDIC')
+porteria27.asignarHijo('EDIC', 'Portería 25')
 porteria27.asignarHijo('Humanas 2', 'Ingeniería Mecánica')
 porteria27.asignarHijo('Luis A. Calvo', 'Estadio 1ero de marzo')
 porteria27.asignarHijo('Luis A. Calvo', 'Administración 1')
 porteria27.asignarHijo('Coliseo UIS', 'Residencias de Estudiantes')
 porteria27.asignarHijo('Residencias de Estudiantes', 'Canchas Múltiples')
+porteria27.asignarHijo('Canchas Múltiples', 'Portería 30')
 porteria27.asignarHijo('Administración 1', 'Administración 3')
 porteria27.asignarHijo('Administración 3', 'Administración 2')
 porteria27.asignarHijo('Administración 3', 'Auditorio José Antonio Galán')
@@ -132,6 +134,7 @@ porteria27.asignarHijo('Laboratorios de Alta Tensión', 'Diseño Industrial')
 porteria27.asignarHijo('Federico Mamitza Bayer', 'Ingeniería E3T')
 
 
+
 porteria25 = Arbol()
 porteria25.asignarHijo('Portería 25', 'Jorge Bautista Vesga')
 porteria25.asignarHijo('Portería 25', 'EDIC')
@@ -145,6 +148,7 @@ porteria25.asignarHijo('Auditorio Luis Eduardo Lobo', 'Administración 1')
 porteria25.asignarHijo('Auditorio Luis Eduardo Lobo', 'Luis A. Calvo')
 porteria25.asignarHijo('Luis A. Calvo', 'Coliseo UIS')
 porteria25.asignarHijo('Coliseo UIS', 'Residencias de Estudiantes')
+porteria25.asignarHijo('Coliseo UIS', 'Portería 30')
 porteria25.asignarHijo('Uisalud', 'Laboratorios de Alta Tensión')
 porteria25.asignarHijo('Uisalud', 'Federico Mamitza Bayer')
 porteria25.asignarHijo('Laboratorios de Alta Tensión', 'Diseño Industrial')
@@ -164,6 +168,7 @@ porteria25.asignarHijo('EDIC', 'Humanas 1')
 porteria25.asignarHijo('Camilo Torres', 'Ingeniería Mecánica')
 porteria25.asignarHijo('Camilo Torres', 'Humanas 2')
 porteria25.asignarHijo('Humanas 1', 'Tienda Universitaria')
+porteria25.asignarHijo('Tienda Universitaria', 'Portería 27')
 
 porteria30 = Arbol()
 porteria30.asignarHijo('Portería 30', 'Coliseo UIS')
@@ -182,8 +187,10 @@ porteria30.asignarHijo('Luis A. Calvo', 'Tienda Universitaria')
 porteria30.asignarHijo('Luis A. Calvo', 'Humanas 2')
 porteria30.asignarHijo('Luis A. Calvo', 'Ingeniería Mecánica')
 porteria30.asignarHijo('Tienda Universitaria', 'Humanas 1')
+porteria30.asignarHijo('Tienda Universitaria', 'Portería 27')
 porteria30.asignarHijo('Humanas 1', 'Laboratorio de Livianos')
 porteria30.asignarHijo('Humanas 1', 'EDIC')
+porteria30.asignarHijo('EDIC', 'Portería 25')
 porteria30.asignarHijo('Humanas 2', 'Auditorio Luis Eduardo Lobo')
 porteria30.asignarHijo('Auditorio Luis Eduardo Lobo', 'Biblioteca')
 porteria30.asignarHijo('Biblioteca', 'Instituto de Lenguas')
@@ -198,7 +205,6 @@ porteria30.asignarHijo('Camilo Torres', 'Ingeniería Química')
 porteria30.asignarHijo('Ingeniería Química', 'Jorge Bautista Vesga')
 porteria30.asignarHijo('Ingeniería Química', 'Ingenierías Físico-Mecánicas')
 porteria30.asignarHijo('Ingeniería Química', 'Uisalud')
-
 
 arboles = [porteria25,porteria27,porteria30]
 
@@ -216,9 +222,13 @@ def encontrarRutaMasCorta(lugar_inicial, lugar_final):
             
     return ruta_mas_corta
 
+lugar_inicial = None
+lugar_final = None
 
 def menu():
     
+    global lugar_inicial, lugar_final
+
     while True:
         print("\nMenú:")
         print("0. Mostrar arboles")
@@ -232,14 +242,34 @@ def menu():
 
         if opcion == '1':
             porteria25.imprimirNodos()
-            NumIni = int(input("¿En qué edificio se encuentra actualmente?(Escriba simplemente el numero) "))
-            NumFin = int(input("¿A dónde quiere llegar?: "))
-            lugar_inicial = porteria25.buscarNodoPorNumero(NumIni)
-            lugar_final = porteria25.buscarNodoPorNumero(NumFin)
+            while True:
+                NumIni = int(input("¿En qué edificio se encuentra actualmente? (Escriba simplemente el número) "))
+                if NumIni > 35 or NumIni<1:  
+                    print("El número ingresado no esta relacionado con ningún lugar, por favor ingrese un numero entre 1 y 35")
+                    continue  
+        
+                lugar_inicial = porteria25.buscarNodoPorNumero(NumIni)
+                if lugar_inicial is not None:  
+                    break 
+                else:
+                    print("Número inválido. Intenta de nuevo.")  
+
+            while True:
+                NumFin = int(input("¿A dónde quiere llegar?: "))
+                if NumFin > 35 or NumFin<1: 
+                    print("El número ingresado no esta relacionado con ningún lugar, por favor ingrese un numero entre 1 y 35")
+                    continue  
+                
+                lugar_final = porteria25.buscarNodoPorNumero(NumFin)
+                if lugar_final is not None:  
+                    break  
+                else:
+                    print("Número inválido. Intenta de nuevo.") 
+
             print(f"Lugar inicial: {lugar_inicial}")
             print(f"Lugar final: {lugar_final}")
-            print("Datos guardados exitosamente, regrese al menu principal para encontrar los caminos")
-            
+            print("Datos guardados exitosamente, regrese al menú principal para encontrar los caminos")
+                
         elif opcion == '0':
             numeroPorteria = input('Ingrese el número de la porteria del arbol, 25, 27 o 30: ')
             if numeroPorteria == '25':
@@ -273,15 +303,19 @@ def menu():
             else:
                 print("Primero debes añadir el lugar inicial y final.")
         elif opcion == '4':
-            ruta_mas_corta = encontrarRutaMasCorta(lugar_inicial,lugar_final)
-            contadorRutas = 1
-            for lugar in ruta_mas_corta:
+            if lugar_inicial is not None and lugar_final is not None:
+                ruta_mas_corta = encontrarRutaMasCorta(lugar_inicial,lugar_final)
+                contadorRutas = 1
                 print("Ruta mas corta con descripción: ")
-                print(str(contadorRutas)+'.')
-                print('Nombre: '+lugar.node_name)
-                print('Descripción: '+lugar.get_attr("descripcion"))
-                print(' ')            
-                contadorRutas += 1
+                for lugar in ruta_mas_corta:
+                    print(str(contadorRutas)+'.')
+                    print('Nombre: '+lugar.node_name)
+                    print('Descripción: '+lugar.get_attr("descripcion"))
+                    print(' ')            
+                    contadorRutas += 1
+            else:
+                print("Primero debes añadir el lugar inicial y final.")
+
         elif opcion == '5':
             print("Saliendo...")
             break
