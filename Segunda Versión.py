@@ -1,12 +1,11 @@
 from bigtree import Node
 from bigtree import Node, print_tree
-from bigtree import preorder_iter
 
 class Arbol():
     def __init__(self):
-        self.porteria25 = Node("Portería 25", Num = 1)
-        self.porteria30 = Node("Portería 30", Num = 2)
-        self.porteria27 = Node("Portería 27", Num = 3)
+        self.porteria25 = Node("Portería 25", Num = 1,descripcion='Porteria carrera 25')
+        self.porteria30 = Node("Portería 30", Num = 2,descripcion='Porteria carrera 30')
+        self.porteria27 = Node("Portería 27", Num = 3,descripcion='Porteria carrera 27')
         self.coliseo = Node("Coliseo UIS", descripcion="Esta ubicado al sureste del campus, cuenta con una cancha polifuncional, camerinos, oficinas y gradería. Tiene 2 pisos y su fachada es en ladrillo rojizo, tiene unas lineas de colores y su techo tiene un estilo semicurvo.", Num=4)
         self.luis_a_calvo = Node("Luis A. Calvo", descripcion="Edificio de 20 metros de altura con una fachada curva en semióvalo y sin ventanas visibles. Está construido en ladrillo rojizo.", Num=5)
         self.residencias = Node("Residencias de Estudiantes", descripcion="Edificio de varios pisos con fachada blanca y paneles verticales marrones. Las escaleras laterales conectan todos los niveles.", Num=6)
@@ -84,12 +83,11 @@ class Arbol():
         if nombre_porteria == "Portería 25":
             print_tree(self.porteria25)
 
-# Mostrar árbol
-#print_tree(root)
-#print_tree(porteria30)
-#ruta = porteria30.go_to(auditorio_lobo)
-##print(ruta)
-#print([node.node_name for node in ruta])
+    def obtenerRuta(self,lugar_inicial, lugar_final):
+        ruta = self.dicNodos[lugar_inicial].go_to(self.dicNodos[lugar_final])
+        #print([node.node_name for node in ruta])
+        return ruta
+
 
 porteria27 = Arbol()
 porteria27.asignarHijo('Portería 27', 'Tienda Universitaria')
@@ -124,7 +122,6 @@ porteria27.asignarHijo('Federico Mamitza Bayer', 'Ingeniería Industrial')
 porteria27.asignarHijo('Federico Mamitza Bayer', 'Laboratorios de Alta Tensión')
 porteria27.asignarHijo('Laboratorios de Alta Tensión', 'Diseño Industrial')
 porteria27.asignarHijo('Federico Mamitza Bayer', 'Ingeniería E3T')
-porteria27.mostrarArbol("Portería 27")
 
 
 porteria25 = Arbol()
@@ -159,7 +156,6 @@ porteria25.asignarHijo('EDIC', 'Humanas 1')
 porteria25.asignarHijo('Camilo Torres', 'Ingeniería Mecánica')
 porteria25.asignarHijo('Camilo Torres', 'Humanas 2')
 porteria25.asignarHijo('Humanas 1', 'Tienda Universitaria')
-porteria25.mostrarArbol("Portería 25")
 
 porteria30 = Arbol()
 porteria30.asignarHijo('Portería 30', 'Coliseo UIS')
@@ -194,18 +190,38 @@ porteria30.asignarHijo('Camilo Torres', 'Ingeniería Química')
 porteria30.asignarHijo('Ingeniería Química', 'Jorge Bautista Vesga')
 porteria30.asignarHijo('Ingeniería Química', 'Ingenierías Físico-Mecánicas')
 porteria30.asignarHijo('Ingeniería Química', 'Uisalud')
-porteria30.mostrarArbol("Portería 30")
+
 
 arboles = [porteria25,porteria27,porteria30]
+
+# función Ruta mas corta
+def encontrarRutaMasCorta(lugar_inicial, lugar_final):
+
+    temporal = 10000
+    ruta_mas_corta = None
+    for arbol in arboles:
+        if(arbol.dicNodos[lugar_inicial] is not None and arbol.dicNodos[lugar_final]):
+            ruta = arbol.obtenerRuta(lugar_inicial,lugar_final)
+            distancia = len(ruta)
+            if distancia<temporal:
+                temporal = distancia
+                ruta_mas_corta = ruta 
+        else:
+
+            print('Digite los lugares correctamente')
+        return ruta_mas_corta
+
 
 def menu():
     
     while True:
         print("\nMenú:")
+        print("0. Mostrar arboles")
         print("1. Añadir lugar actual y destino")
         print("2. Ruta más corta")
         print("3. Todas las rutas")
-        print("4. Salir")
+        print("4. Mostrar descripciones")
+        print("5. Salir")
         
         opcion = input("¿Qué función desea utilizar? ")
 
@@ -219,25 +235,49 @@ def menu():
             print(f"Lugar final: {lugar_final}")
             print("Datos guardados exitosamente, regrese al menu principal para encontrar los caminos")
             
+        elif opcion == '0':
+            numeroPorteria = input('Ingrese el número de la porteria del arbol, 25, 27 o 30: ')
+            if numeroPorteria == '25':
+                porteria25.mostrarArbol("Portería 25")
+            elif numeroPorteria == '27':
+                porteria27.mostrarArbol("Portería 27")
+            elif numeroPorteria == '30':
+                porteria30.mostrarArbol("Portería 30")
+            else:
+                print('Ingrese un número válido')
+            
         elif opcion == '2':
             if lugar_inicial != None and lugar_final != None:
                 print(f"Ruta más corta de {lugar_inicial} a {lugar_final}")
-                #
-                #
-                #
+                ruta_mas_corta = encontrarRutaMasCorta(lugar_inicial,lugar_final)
+                print([node.node_name for node in ruta_mas_corta])
             else:
                 print("Primero debes añadir el lugar inicial y final.")
                 
         elif opcion == '3':
             if lugar_inicial != None and lugar_final != None:
                 print(f"Todas las rutas de {lugar_inicial} a {lugar_final}")
-                #
-                #
-                #
+                rutas = []
+                contadorRutas = 1
+                for arbol in arboles:
+                    rutas.append(arbol.obtenerRuta(lugar_inicial,lugar_final)) 
+                for ruta in rutas:
+                    print('Ruta '+str(contadorRutas)+':')
+                    print([node.node_name for node in ruta])
+                    contadorRutas += 1
             else:
                 print("Primero debes añadir el lugar inicial y final.")
-                
         elif opcion == '4':
+            ruta_mas_corta = encontrarRutaMasCorta(lugar_inicial,lugar_final)
+            contadorRutas = 1
+            for lugar in ruta_mas_corta:
+                print("Ruta mas corta con descripción: ")
+                print(str(contadorRutas)+'.')
+                print('Nombre: '+lugar.node_name)
+                print('Descripción: '+lugar.get_attr("descripcion"))
+                print(' ')            
+                contadorRutas += 1
+        elif opcion == '5':
             print("Saliendo...")
             break
         
@@ -252,4 +292,3 @@ def menu():
 
 # Llamada a la función del menú
 menu()
-
