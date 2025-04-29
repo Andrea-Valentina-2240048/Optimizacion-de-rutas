@@ -1,5 +1,5 @@
 from bigtree import Node
-from bigtree import Node, print_tree
+from bigtree import print_tree
 
 class Arbol():
     def __init__(self):
