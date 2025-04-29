@@ -1,3 +1,11 @@
+###########################
+# Integrantes:
+# Andrea Valentina Delgado Ruiz - 2240048
+# Vanessa Martínez Angarita - 2241917
+# Nelson Andres Urrea Calvo - 2221115
+###########################
+
+
 from bigtree import Node
 from bigtree import print_tree
 
