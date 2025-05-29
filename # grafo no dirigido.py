@@ -85,7 +85,6 @@ aristas_formateadas = [
     for destino, peso in destinos
 ]
 
-
 G.add_nodes_from(lugares.items())
 G.add_edges_from(aristas_formateadas)
 #pos = nx.spring_layout(G, seed=42)  
@@ -112,16 +111,40 @@ def imprimirNombreNodos():
     for n in G.nodes:
         print(str(n)+": "+G.nodes[n]["nombre"])
 
+def plotearGrafo():
+    pos = nx.spring_layout(G, seed=42)  
+    labels = {n: G.nodes[n]["nombre"] for n in G.nodes}
+    #edge_labels = {(u, v): f"{d['weight']:.2f}" for u, v, d in G.edges(data=True)}
+    nx.draw(G,pos, with_labels=True, labels=labels,font_size=6,width=0.8, node_size=500) 
+    #nx.draw_networkx_edge_labels(G, pos,edge_labels=edge_labels,font_size=5)
+    plt.show()
+
+def rutaMasCorta(lugarPartida, lugarLlegada):
+    path = nx.shortest_path(G, dictNumeros[str(lugarPartida)], dictNumeros[str(lugarLlegada)], weight="weight")
+    total_weight = nx.shortest_path_length(G, dictNumeros[str(lugarPartida)], dictNumeros[str(lugarLlegada)], weight="weight")
+    contador = 1
+    for numero in path:
+        descripcion = lugares[numero].get("descripcion")
+        print(contador)
+        print(descripcion)
+        contador += 1
+
+    print("Camino más corto: ", path)
+    print("Peso del recorrido: ", total_weight)
+    print(" ")
+
+def agregarLugar(nuevoLugar,descripcionLugar,numero):
+    G.add_nodes_from([dictNumeros[str(numero)]], nombre = nuevoLugar, descripcion = descripcionLugar)
+
 def menu():
     
     
     global contadorLugares 
     contadorLugares = 35
+    print("Nodos del grafo: ")
+    imprimirNombreNodos()
+    print(" ")
     while True:
-
-        print("Nodos del grafo: ")
-        imprimirNombreNodos()
-        print(" ")
         print("\nMenú:")
         print("1. Mostrar Grafo")
         print("2. Encontrar la ruta mas corta")
@@ -132,28 +155,13 @@ def menu():
         opcion = input("¿Qué función desea utilizar? ")
 
         if opcion == '1':
-            pos = nx.spring_layout(G, seed=42)  
-            labels = {n: G.nodes[n]["nombre"] for n in G.nodes}
-            #edge_labels = {(u, v): f"{d['weight']:.2f}" for u, v, d in G.edges(data=True)}
-            nx.draw(G,pos, with_labels=True, labels=labels,font_size=6,width=0.8, node_size=500) 
-            #nx.draw_networkx_edge_labels(G, pos,edge_labels=edge_labels,font_size=5)
-            plt.show()
+            plotearGrafo()
             print(" ")
 
         elif opcion == '2':
             lugarPartida = input("Ingrese el lugar de partida: ")
             lugarLlegada = input("Ingrese el lugar de Llegada: ")
-            path = nx.shortest_path(G, dictNumeros[lugarPartida], dictNumeros[lugarLlegada], weight="weight")
-            total_weight = nx.shortest_path_length(G, dictNumeros[lugarPartida], dictNumeros[lugarLlegada], weight="weight")
-            contador = 1
-            for numero in path:
-                descripcion = lugares[numero].get("descripcion")
-                print(contador)
-                print(descripcion)
-                contador += 1
-
-            print("Camino más corto: ", path)
-            print("Peso del recorrido: ", total_weight)
+            rutaMasCorta(lugarPartida, lugarLlegada)
             print(" ")
 
         elif opcion == '3':
@@ -161,7 +169,7 @@ def menu():
             descripcionLugar = input( "Ingrese la descripción del nuevo lugar: ")
             contadorLugares += 1
             numero = str(contadorLugares)
-            G.add_nodes_from([dictNumeros[numero]], nombre = nuevoLugar, descripcion = descripcionLugar)
+            agregarLugar(nuevoLugar,descripcionLugar,numero)
             print("Lugar ingresado al número "+numero)
             print(" ")
 
