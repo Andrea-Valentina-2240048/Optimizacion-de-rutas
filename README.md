@@ -3,13 +3,15 @@ Andrea Valentina Delgado Ruiz - 2240048
 Vanessa Martínez Angarita - 2241917
 Nelson Andres Urrea Calvo - 2221115
 
+# Descripción del problema: 
+Se desarrolló un programa que ayude a encontrar la ruta más optima (más corta) para ir de un lugar a otro dentro de la UIS, tomado todos sus edificios como pontos de referencia.  
+Este programa le permitirá al usuario elegir el lugar donde se encuentra y al que quiere llegar, mostrándole el camino más corto según la distancia que deba recorrer. Este programa se creó pensando en facilitar la movilidad y ubicación dentro de la universidad, mayormente para estudiantes de nuevo ingreso o personas que no conozcan muy bien el campus.  
+
 # Enfoque del proyecto:
-A través de este proyecto se desarrollará un sistema de optimización de rutas que encuentre el
-camino más óptimo desde un lugar a otro, nosotros decidimos basar este proyecto en la UIS,
-tomando inicialmente 12 edificios de la universidad que conectaremos en varias rutas.
+A través de este proyecto se desarrolló un sistema de optimización de rutas que encuentra el camino más óptimo desde un lugar a otro, nosotros decidimos basar este proyecto en la UIS, tomando como referencia todos sus edificios.  
 
 # Desarrollo de la primera versión:
-Para el desarrollo de esta primera versión del proyecto, trabajaremos con listas doblemente
+Para el desarrollo de esta primera versión del proyecto, trabajaremos con listas doblemente 
 enlazadas. Cada nodo representará un punto (edificio de la universidad) y se tendrán varias 
 listas que contienen todos los lugares pero en orden diferente (rutas).
 El objetivo de esta versión del proyecto es que el usuario pueda ingresar el lugar donde se
