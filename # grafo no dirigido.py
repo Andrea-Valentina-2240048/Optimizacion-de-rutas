@@ -77,40 +77,24 @@ aristas = {
     34: [(1, 20), (21, 30), (32, 10), (33, 3)], 
     35: [(23, 8), (24, 13), (25, 4), (26, 4), (27, 10), (31, 8), (32, 6)]
 }
-
+# Diccionario de numeros 
 dictNumeros = {str(i): i for i in range(1, 101)}
+# Aristas originales llevadas al formato de networkx
 aristas_formateadas = [
     (origen, destino, {'weight': peso})
     for origen, destinos in aristas.items()
     for destino, peso in destinos
 ]
-
+# Agregar nodos ya arista a la instacia de networkx
 G.add_nodes_from(lugares.items())
 G.add_edges_from(aristas_formateadas)
-#pos = nx.spring_layout(G, seed=42)  
-#labels = {n: G.nodes[n]["nombre"] for n in G.nodes}
-#nx.draw(G,pos, with_labels=True, labels=labels,font_size=6,width=0.8, node_size=500)  # with_labels=True para ver los nodos numerados
-#plt.show()
 
-#partida = 1
-#salida = 14
-#path = nx.shortest_path(G, partida, salida, weight="weight")
-#total_weight = nx.shortest_path_length(G, partida, salida, weight="weight")
-#contador = 1
-
-
-#for numero in path:
- #   descripcion = lugares[numero].get("descripcion")
- #   print(contador)
- #   print(descripcion)
-#    contador += 1
-
-#print("Camino más corto:", path)
-#print("Peso total:", total_weight)
+# Función para imprimir los nodos y su nombre
 def imprimirNombreNodos():
     for n in G.nodes:
         print(str(n)+": "+G.nodes[n]["nombre"])
 
+# Función para mostrar el grafo
 def plotearGrafo():
     pos = nx.spring_layout(G, seed=42)  
     labels = {n: G.nodes[n]["nombre"] for n in G.nodes}
@@ -119,6 +103,7 @@ def plotearGrafo():
     #nx.draw_networkx_edge_labels(G, pos,edge_labels=edge_labels,font_size=5)
     plt.show()
 
+# Función para encontrar la ruta mas corta 
 def rutaMasCorta(lugarPartida, lugarLlegada):
     path = nx.shortest_path(G, dictNumeros[str(lugarPartida)], dictNumeros[str(lugarLlegada)], weight="weight")
     total_weight = nx.shortest_path_length(G, dictNumeros[str(lugarPartida)], dictNumeros[str(lugarLlegada)], weight="weight")
@@ -133,8 +118,10 @@ def rutaMasCorta(lugarPartida, lugarLlegada):
     print("Peso del recorrido: ", total_weight)
     print(" ")
 
+# Función par agregar un nuevo lugar al grafo
 def agregarLugar(nuevoLugar,descripcionLugar,numero):
     G.add_nodes_from([dictNumeros[str(numero)]], nombre = nuevoLugar, descripcion = descripcionLugar)
+
 
 def menu():
     
@@ -189,6 +176,4 @@ def menu():
             print("Opción no válida. Por favor, selecciona una opción correcta.")
             print(" ")
 
-
-#Llamada a la función del menú
 menu()
