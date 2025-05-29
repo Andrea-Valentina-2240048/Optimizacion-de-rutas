@@ -1,5 +1,6 @@
-import networkx as nx
+import networkx as nx # pip install networkx
 import matplotlib.pyplot as plt
+
 
 G = nx.Graph()
 lugares = {
