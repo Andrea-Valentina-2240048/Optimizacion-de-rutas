@@ -78,6 +78,7 @@ aristas = {
     35: [(23, 8), (24, 13), (25, 4), (26, 4), (27, 10), (31, 8), (32, 6)]
 }
 
+dictNumeros = {str(i): i for i in range(1, 101)}
 aristas_formateadas = [
     (origen, destino, {'weight': peso})
     for origen, destinos in aristas.items()
@@ -87,29 +88,99 @@ aristas_formateadas = [
 
 G.add_nodes_from(lugares.items())
 G.add_edges_from(aristas_formateadas)
-# Layout para ubicar los nodos
-pos = nx.spring_layout(G, seed=42)  
-#print(G.number_of_nodes())
-#print(G.number_of_edges())
-labels = {n: G.nodes[n]["nombre"] for n in G.nodes}
-#edge_labels = {(u, v): f"{d['weight']:.2f}" for u, v, d in G.edges(data=True)}
-nx.draw(G,pos, with_labels=True, labels=labels,font_size=6,width=0.8, node_size=500)  # with_labels=True para ver los nodos numerados
-#nx.draw_networkx_edge_labels(G, pos,edge_labels=edge_labels,font_size=5)
-plt.show()
+#pos = nx.spring_layout(G, seed=42)  
+#labels = {n: G.nodes[n]["nombre"] for n in G.nodes}
+#nx.draw(G,pos, with_labels=True, labels=labels,font_size=6,width=0.8, node_size=500)  # with_labels=True para ver los nodos numerados
+#plt.show()
 
-partida = 1
-salida = 14
-path = nx.shortest_path(G, partida, salida, weight="weight")
-total_weight = nx.shortest_path_length(G, partida, salida, weight="weight")
-contador = 1
+#partida = 1
+#salida = 14
+#path = nx.shortest_path(G, partida, salida, weight="weight")
+#total_weight = nx.shortest_path_length(G, partida, salida, weight="weight")
+#contador = 1
 
 
-for numero in path:
-    descripcion = lugares[numero].get("descripcion")
-    print(contador)
-    print(descripcion)
-    contador += 1
+#for numero in path:
+ #   descripcion = lugares[numero].get("descripcion")
+ #   print(contador)
+ #   print(descripcion)
+#    contador += 1
 
-print("Camino más corto:", path)
-print("Peso total:", total_weight)
+#print("Camino más corto:", path)
+#print("Peso total:", total_weight)
+def imprimirNombreNodos():
+    for n in G.nodes:
+        print(str(n)+": "+G.nodes[n]["nombre"])
 
+def menu():
+    
+    
+    global contadorLugares 
+    contadorLugares = 35
+    while True:
+
+        print("Nodos del grafo: ")
+        imprimirNombreNodos()
+        print(" ")
+        print("\nMenú:")
+        print("1. Mostrar Grafo")
+        print("2. Encontrar la ruta mas corta")
+        print("3. Agregar lugar")
+        print("4. Eliminar lugar")
+        print("5. Salir")
+        
+        opcion = input("¿Qué función desea utilizar? ")
+
+        if opcion == '1':
+            pos = nx.spring_layout(G, seed=42)  
+            labels = {n: G.nodes[n]["nombre"] for n in G.nodes}
+            #edge_labels = {(u, v): f"{d['weight']:.2f}" for u, v, d in G.edges(data=True)}
+            nx.draw(G,pos, with_labels=True, labels=labels,font_size=6,width=0.8, node_size=500) 
+            #nx.draw_networkx_edge_labels(G, pos,edge_labels=edge_labels,font_size=5)
+            plt.show()
+            print(" ")
+
+        elif opcion == '2':
+            lugarPartida = input("Ingrese el lugar de partida: ")
+            lugarLlegada = input("Ingrese el lugar de Llegada: ")
+            path = nx.shortest_path(G, dictNumeros[lugarPartida], dictNumeros[lugarLlegada], weight="weight")
+            total_weight = nx.shortest_path_length(G, dictNumeros[lugarPartida], dictNumeros[lugarLlegada], weight="weight")
+            contador = 1
+            for numero in path:
+                descripcion = lugares[numero].get("descripcion")
+                print(contador)
+                print(descripcion)
+                contador += 1
+
+            print("Camino más corto: ", path)
+            print("Peso del recorrido: ", total_weight)
+            print(" ")
+
+        elif opcion == '3':
+            nuevoLugar = input("Ingrese el nombre del nuevo lugar: ")
+            descripcionLugar = input( "Ingrese la descripción del nuevo lugar: ")
+            contadorLugares += 1
+            numero = str(contadorLugares)
+            G.add_nodes_from([dictNumeros[numero]], nombre = nuevoLugar, descripcion = descripcionLugar)
+            print("Lugar ingresado al número "+numero)
+            print(" ")
+
+
+        elif opcion == '4':
+            lugarAEliminar = input("Ingrese el número del lugar a eliminar: ")
+            numero = dictNumeros[lugarAEliminar]
+            G.remove_node(numero)
+            contadorLugares += 1
+            print(" ")
+
+        elif opcion == '5':
+            print("Saliendo...")
+            break
+        
+        else:
+            print("Opción no válida. Por favor, selecciona una opción correcta.")
+            print(" ")
+
+
+#Llamada a la función del menú
+menu()
