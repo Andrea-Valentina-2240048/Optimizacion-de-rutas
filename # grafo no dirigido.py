@@ -137,6 +137,7 @@ def imprimirNombreNodos():
 def plotearGrafo():
     pos = nx.spring_layout(G, seed=42)  
     labels = {n: G.nodes[n]["nombre"] for n in G.nodes}
+    # Se evita mostrar los pesos de las aristas por motivo visual del plot
     #edge_labels = {(u, v): f"{d['weight']:.2f}" for u, v, d in G.edges(data=True)}
     nx.draw(G,pos, with_labels=True, labels=labels,font_size=6,width=0.4, node_size=100) 
     #nx.draw_networkx_edge_labels(G, pos,edge_labels=edge_labels,font_size=5)
@@ -150,8 +151,9 @@ def rutaMasCorta(lugarPartida, lugarLlegada):
     for numero in path:
         nombre = lugares[numero].get("nombre")
         descripcion = lugares[numero].get("descripcion")
-        print(contador)
-        print(nombre+ ": " +descripcion)
+        print(numero)
+        print(nombre+": ")
+        print(descripcion)
         contador += 1
 
     print("Camino más corto: ", path)
